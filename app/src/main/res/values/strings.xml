@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">PhotoSchoppe</string>
+    <string name="hi_name">Hi %1$s</string>
+    <string name="welcome_message">WELCOME TO PHOTO SCHOPPE</string>
+    <string name="button_portfolio">PORTFOLIO</string>
+    <string name="button_directory">DIRECTORY</string>
+    <string name="button_more">MORE</string>
+    <string name="button_create_me">CREATE ACCOUNT</string>
+    <string name="txt_user_name">User Name</string>
+    <string name="txt_email">Email</string>
+    <string name="txt_password">Password</string>
+    <string name="txt_password_confirmed">Confirm Password</string>
 </resources>
