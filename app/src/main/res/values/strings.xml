@@ -10,4 +10,7 @@
     <string name="txt_email">Email</string>
     <string name="txt_password">Password</string>
     <string name="txt_password_confirmed">Confirm Password</string>
+    <string name="txt_first_name">First Name</string>
+    <string name="txt_last_name">Last Name</string>
+    <string name="txt_phone">Phone NO</string>
 </resources>
