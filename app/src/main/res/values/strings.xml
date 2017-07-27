@@ -13,4 +13,13 @@
     <string name="txt_first_name">First Name</string>
     <string name="txt_last_name">Last Name</string>
     <string name="txt_phone">Phone NO</string>
+    <string name="previously_started">previously_started</string>
+    <string name="button_login">LOG IN</string>
+    <string name="user_name_SP">user_name</string>
+    <string name="password_SP">password</string>
+    <string name="email_SP">email</string>
+    <string name="enter_email">Enter Email</string>
+    <string name="enter_subject">Enter_Subject</string>
+    <string name="message">Enter Message</string>
+    <string name="send_mail_btn">Send Mail</string>
 </resources>

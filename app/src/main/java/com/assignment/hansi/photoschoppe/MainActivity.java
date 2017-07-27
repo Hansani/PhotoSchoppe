@@ -2,6 +2,7 @@ package com.assignment.hansi.photoschoppe;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -25,6 +26,11 @@ public class MainActivity extends RoboActivity {
         String original = getString(R.string.hi_name);
         String new_hi_string = String.format(original, user_name);
         hi_txt.setText(new_hi_string);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
     }
 
     public void pressedPortfolio(View view) {

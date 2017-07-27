@@ -5,4 +5,6 @@ package com.assignment.hansi.photoschoppe;
  */
 
 public class LogInActivity {
+
+
 }

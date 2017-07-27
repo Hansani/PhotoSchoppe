@@ -14,7 +14,7 @@ import java.util.List;
 
 public class DBHandler extends SQLiteOpenHelper {
 
-    private static final String DB_NAME = "photoschoppe.db";
+    public static final String DB_NAME = "photoschoppe.db";
     private static final Integer DB_VERSION = 1;
     public Context contextdb;
     private SQLiteDatabase photoSchoppeDB;

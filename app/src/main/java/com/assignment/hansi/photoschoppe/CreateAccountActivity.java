@@ -3,9 +3,7 @@ package com.assignment.hansi.photoschoppe;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.EditText;
-
 import roboguice.activity.RoboActivity;
 import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
@@ -26,12 +24,13 @@ public class CreateAccountActivity extends RoboActivity{
         super.onCreate(savedInstanceState);
     }
 
-    public void createAccountMethod(View view){
+
+    public void createAccountMethod(){
         SharedPreferences preferences = getSharedPreferences("com.assignment.hansi.userDetail",0);
         SharedPreferences.Editor editor = preferences.edit();
-        editor.putString("user_name",user_name.getText().toString());
-        editor.putString("email",email.getText().toString());
-        editor.putString("password",password.getText().toString());
+        editor.putString(getString(R.string.user_name_SP),user_name.getText().toString());
+        editor.putString(getString(R.string.email_SP),email.getText().toString());
+        editor.putString(getString(R.string.password_SP),password.getText().toString());
         editor.commit();
 
         if (editor.commit()){
