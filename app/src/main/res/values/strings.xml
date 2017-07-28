@@ -1,5 +1,13 @@
 <resources>
+    //app name
     <string name="app_name">PhotoSchoppe</string>
+
+    //create account
+    <string name="user_name_SP">user_name</string>
+    <string name="password_SP">password</string>
+    <string name="email_SP">email</string>
+
+
     <string name="hi_name">Hi %1$s</string>
     <string name="welcome_message">WELCOME TO PHOTO SCHOPPE</string>
     <string name="button_portfolio">PORTFOLIO</string>
@@ -15,11 +23,15 @@
     <string name="txt_phone">Phone NO</string>
     <string name="previously_started">previously_started</string>
     <string name="button_login">LOG IN</string>
-    <string name="user_name_SP">user_name</string>
-    <string name="password_SP">password</string>
-    <string name="email_SP">email</string>
     <string name="enter_email">Enter Email</string>
     <string name="enter_subject">Enter_Subject</string>
     <string name="message">Enter Message</string>
+    <string name="photoschoppe_address">No.48,\nIBM Building - 4th Floor,\nNawam Mawatha,\nColombo.</string>
+    <string name="address">Address : </string>
+    <string name="photoschoppe_phone_no">011 2 300500</string>
+    <string name="phone_no">Phone NO :</string>
+    <string name="photoschoppe_email">PhotoSchoppe@gmail.com</string>
+    <string name="email">Email :</string>
     <string name="send_mail_btn">Send Mail</string>
+    <string name="sample_phone_num">123 123 1234</string>
 </resources>

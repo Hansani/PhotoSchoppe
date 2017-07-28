@@ -21,6 +21,8 @@
         <activity android:name=".CreateAccountActivity"/>
         <activity android:name=".MainActivity"/>
         <activity android:name=".DirectoryActivity"/>
+        <activity android:name=".MoreActivity"/>
+        <activity android:name=".PortfolioActivity"/>
     </application>
 
 </manifest>
