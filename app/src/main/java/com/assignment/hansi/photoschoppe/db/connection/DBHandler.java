@@ -4,6 +4,9 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
+
+import com.assignment.hansi.photoschoppe.model.Photographer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,9 +17,9 @@ import java.util.List;
 
 public class DBHandler extends SQLiteOpenHelper {
 
-    public static final String DB_NAME = "photoschoppe.db";
-    public static final String LOCATION = "data/data/com.assignment.hansi.photoschoppe/databases";
-    private static final Integer DB_VERSION = 1;
+    public static final String DB_NAME = "photoshoppe.db";
+    public static final String LOCATION = "/data/data/com.assignment.hansi.photoschoppe/databases/";
+    public static final int DB_VERSION = 1;
     public Context contextdb;
     private SQLiteDatabase photoSchoppeDB;
 
@@ -30,11 +33,21 @@ public class DBHandler extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
     }
 
+
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
     }
 
-    public void openDatabase(){
+    public static String getDbName() {
+        return DB_NAME;
+    }
+
+    public static int getDbVersion() {
+        return DB_VERSION;
+    }
+
+    //open the database
+    public void openDataBase(){
         String dbpath = contextdb.getDatabasePath(DB_NAME).getPath();
         if (photoSchoppeDB != null && photoSchoppeDB.isOpen()) {
             return;
@@ -42,8 +55,9 @@ public class DBHandler extends SQLiteOpenHelper {
         photoSchoppeDB = SQLiteDatabase.openDatabase(dbpath, null, SQLiteDatabase.OPEN_READONLY);
     }
 
-    public void closeDatabase(){
-        if (photoSchoppeDB!= null){
+    //close the database
+    public void closeDataBase(){
+        if (photoSchoppeDB != null){
             photoSchoppeDB.close();
         }
     }
@@ -51,7 +65,8 @@ public class DBHandler extends SQLiteOpenHelper {
     public List<Photographer> getAllPGs() {
         Photographer photographer = null;
         List<Photographer> photographerList = new ArrayList<>();
-        openDatabase();
+        openDataBase();
+        Log.d("open_db", String.valueOf(photoSchoppeDB.isOpen()));
         if (photoSchoppeDB.isOpen()) {
             Cursor cursor = photoSchoppeDB.rawQuery("SELECT * FROM photographer", null);
             cursor.moveToFirst();
@@ -63,7 +78,7 @@ public class DBHandler extends SQLiteOpenHelper {
             }
             cursor.close();
         }
-        closeDatabase();
+        closeDataBase();
         return photographerList;
     }
 }

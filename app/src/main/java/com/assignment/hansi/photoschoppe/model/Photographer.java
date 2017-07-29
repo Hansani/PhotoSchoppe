@@ -1,4 +1,4 @@
-package com.assignment.hansi.photoschoppe;
+package com.assignment.hansi.photoschoppe.model;
 
 /**
  * Created by hansanibiyanwila on 7/25/17.

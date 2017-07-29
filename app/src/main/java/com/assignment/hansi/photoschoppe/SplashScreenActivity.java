@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import com.assignment.hansi.photoschoppe.db.connection.DBHandler;
+
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -28,7 +30,7 @@ public class SplashScreenActivity extends RoboActivity {
                 super.run();
                 try {
                     sleep(3000);
-                    SharedPreferences preferences = getSharedPreferences("com.assignment.hansi.userDetail", 0);
+                    SharedPreferences preferences = getSharedPreferences("com.assignment.hansi.userdetail", 0);
                     boolean previouslyStarted = preferences.getBoolean(getString(R.string.previously_started), Boolean.FALSE);
                     if (!previouslyStarted) {
                         SharedPreferences.Editor editor = preferences.edit();
@@ -48,25 +50,25 @@ public class SplashScreenActivity extends RoboActivity {
             }
         };
         thread.start();
-
     }
 
-    public  boolean copyDatabase(Context context){
+    public static boolean copyDatabase(Context context) {
         try {
-            InputStream inputStream = context.getAssets().open(DBHandler.DB_NAME);
-            String outPutFileStream = DBHandler.LOCATION + DBHandler.DB_NAME;
-            OutputStream outputStream = new FileOutputStream(outPutFileStream);
+            InputStream inputStream = context.getAssets().open(DBHandler.getDbName());
+            String outFileName = DBHandler.LOCATION + DBHandler.DB_NAME;
+            OutputStream outputStream = new FileOutputStream(outFileName);
             byte[] bytes = new byte[1024];
             int n = 0;
-            while (inputStream.read(bytes)>0){
-                outputStream.write(bytes,0,n);
+            while ((n = inputStream.read(bytes)) > 0) {
+                outputStream.write(bytes, 0, n);
             }
             outputStream.flush();
             outputStream.close();
             return true;
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
     }
+
 }
