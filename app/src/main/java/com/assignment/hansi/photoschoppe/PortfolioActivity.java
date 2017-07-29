@@ -67,11 +67,11 @@ public class PortfolioActivity extends RoboActivity{
                 new com.android.volley.Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        try {
-                            downloadComplete(RoboGuice.Util.retrieveRepositoriesFromResponse(response)); // 3
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
+//                        try {
+////                            downloadComplete(RoboGuice.Util.retrieveRepositoriesFromResponse(response)); // 3
+//                        } catch (JSONException e) {
+//                            e.printStackTrace();
+//                        }
                     }
                 }, new com.android.volley.Response.ErrorListener() {
             @Override

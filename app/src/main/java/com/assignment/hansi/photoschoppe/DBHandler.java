@@ -15,6 +15,7 @@ import java.util.List;
 public class DBHandler extends SQLiteOpenHelper {
 
     public static final String DB_NAME = "photoschoppe.db";
+    public static final String LOCATION = "data/data/com.assignment.hansi.photoschoppe/databases";
     private static final Integer DB_VERSION = 1;
     public Context contextdb;
     private SQLiteDatabase photoSchoppeDB;
@@ -27,32 +28,42 @@ public class DBHandler extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        String dbpath = contextdb.getDatabasePath(DB_NAME).getPath();
-
-        if (photoSchoppeDB != null && photoSchoppeDB.isOpen()) {
-            return;
-        }
-
-        photoSchoppeDB = SQLiteDatabase.openDatabase(dbpath, null, SQLiteDatabase.OPEN_READONLY);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
-
     }
 
-    public Photographer[] getAllPGs() {
-        ArrayList<Photographer> photographerList = null;
+    public void openDatabase(){
+        String dbpath = contextdb.getDatabasePath(DB_NAME).getPath();
+        if (photoSchoppeDB != null && photoSchoppeDB.isOpen()) {
+            return;
+        }
+        photoSchoppeDB = SQLiteDatabase.openDatabase(dbpath, null, SQLiteDatabase.OPEN_READONLY);
+    }
+
+    public void closeDatabase(){
+        if (photoSchoppeDB!= null){
+            photoSchoppeDB.close();
+        }
+    }
+
+    public List<Photographer> getAllPGs() {
+        Photographer photographer = null;
+        List<Photographer> photographerList = new ArrayList<>();
+        openDatabase();
         if (photoSchoppeDB.isOpen()) {
             Cursor cursor = photoSchoppeDB.rawQuery("SELECT * FROM photographer", null);
-            while (cursor.moveToNext()) {
-                Photographer photographer = new Photographer(cursor.getString(0).toString(),
+            cursor.moveToFirst();
+            while (cursor.isAfterLast()) {
+                photographer = new Photographer(cursor.getString(0).toString(),
                         cursor.getString(1).toString(), cursor.getString(2).toString(), cursor.getString(3).toString());
                 photographerList.add(photographer);
+                cursor.moveToNext();
             }
             cursor.close();
         }
-        photoSchoppeDB.close();
-        return photographerList.toArray(new Photographer[photographerList.size()]);
+        closeDatabase();
+        return photographerList;
     }
 }

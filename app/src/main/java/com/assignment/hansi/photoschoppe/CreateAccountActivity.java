@@ -3,7 +3,10 @@ package com.assignment.hansi.photoschoppe;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
+
 import roboguice.activity.RoboActivity;
 import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
@@ -25,7 +28,7 @@ public class CreateAccountActivity extends RoboActivity{
     }
 
 
-    public void createAccountMethod(){
+    public void createAccountMethod(View view){
         SharedPreferences preferences = getSharedPreferences("com.assignment.hansi.userDetail",0);
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString(getString(R.string.user_name_SP),user_name.getText().toString());
@@ -34,7 +37,7 @@ public class CreateAccountActivity extends RoboActivity{
         editor.commit();
 
         if (editor.commit()){
-            //send message to the user telling that he is now log in
+            Toast.makeText(getApplicationContext(), "create account successfully", Toast.LENGTH_SHORT).show();
         }
 
         Intent intent  = new Intent(this,  MainActivity.class);
