@@ -1,10 +1,11 @@
-package com.assignment.hansi.photoschoppe;
+package com.assignment.hansi.photoschoppe.db.connection;
 
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.assignment.hansi.photoschoppe.model.Photographer;
 
@@ -47,7 +48,7 @@ public class DBHandler extends SQLiteOpenHelper {
     }
 
     //open the database
-    public void openDataBase(){
+    public void openDataBase() {
         String dbpath = contextdb.getDatabasePath(DB_NAME).getPath();
         if (photoSchoppeDB != null && photoSchoppeDB.isOpen()) {
             return;
@@ -56,28 +57,25 @@ public class DBHandler extends SQLiteOpenHelper {
     }
 
     //close the database
-    public void closeDataBase(){
-        if (photoSchoppeDB != null){
+    public void closeDataBase() {
+        if (photoSchoppeDB != null) {
             photoSchoppeDB.close();
         }
     }
 
     public List<Photographer> getAllPGs() {
-        Photographer photographer = null;
+        Photographer photographer;
         List<Photographer> photographerList = new ArrayList<>();
         openDataBase();
-        Log.d("open_db", String.valueOf(photoSchoppeDB.isOpen()));
-        if (photoSchoppeDB.isOpen()) {
-            Cursor cursor = photoSchoppeDB.rawQuery("SELECT * FROM photographer", null);
-            cursor.moveToFirst();
-            while (cursor.isAfterLast()) {
-                photographer = new Photographer(cursor.getString(0).toString(),
-                        cursor.getString(1).toString(), cursor.getString(2).toString(), cursor.getString(3).toString());
-                photographerList.add(photographer);
-                cursor.moveToNext();
-            }
-            cursor.close();
+        Cursor cursor = photoSchoppeDB.rawQuery("SELECT * FROM photographer", null);
+        Log.d("select query", cursor.toString());
+        cursor.moveToFirst();
+        while (cursor.moveToNext()) {
+            photographer = new Photographer(cursor.getString(0), cursor.getString(1), cursor.getString(2),
+                    cursor.getString(3));
+            photographerList.add(photographer);
         }
+        cursor.close();
         closeDataBase();
         return photographerList;
     }

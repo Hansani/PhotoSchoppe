@@ -22,6 +22,7 @@
     <string name="txt_last_name">Last Name</string>
     <string name="txt_phone">Phone NO</string>
     <string name="previously_started">previously_started</string>
+    <string name="is_login">is_login</string>
     <string name="button_login">LOG IN</string>
     <string name="enter_email">Enter Email</string>
     <string name="enter_subject">Enter_Subject</string>
@@ -34,4 +35,10 @@
     <string name="email">Email :</string>
     <string name="send_mail_btn">Send Mail</string>
     <string name="sample_phone_num">123 123 1234</string>
+    <string name="view_location_btn">VIEW LOCATION</string>
+    <string name="title_activity_load_location">Map</string>
+    <string name="title_activity_location">Map</string>
+    <string name="share_image">Share</string>
+    <string name="web_image">Web View</string>
+    <string name="btn_logout">Log Out</string>
 </resources>

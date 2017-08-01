@@ -1,15 +1,8 @@
 package com.assignment.hansi.photoschoppe;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-
-import com.assignment.hansi.photoschoppe.db.connection.DBHandler;
-
-import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.io.OutputStream;
 
 import roboguice.activity.RoboActivity;
 import roboguice.inject.ContentView;
@@ -41,6 +34,7 @@ public class SplashScreenActivity extends RoboActivity {
                     } else {
                         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                         startActivity(intent);
+                        finish();
                     }
                 } catch (InterruptedException e) {
                     e.printStackTrace();
@@ -50,25 +44,9 @@ public class SplashScreenActivity extends RoboActivity {
             }
         };
         thread.start();
+
     }
 
-    public static boolean copyDatabase(Context context) {
-        try {
-            InputStream inputStream = context.getAssets().open(DBHandler.getDbName());
-            String outFileName = DBHandler.LOCATION + DBHandler.DB_NAME;
-            OutputStream outputStream = new FileOutputStream(outFileName);
-            byte[] bytes = new byte[1024];
-            int n = 0;
-            while ((n = inputStream.read(bytes)) > 0) {
-                outputStream.write(bytes, 0, n);
-            }
-            outputStream.flush();
-            outputStream.close();
-            return true;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
+
 
 }

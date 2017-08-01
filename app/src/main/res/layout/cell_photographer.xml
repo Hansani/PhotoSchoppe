@@ -19,8 +19,8 @@
         android:layout_marginRight="8dp"
         android:layout_marginTop="8dp"
         android:ems="10"
-        android:hint="@string/txt_first_name" />
-        <!--android:inputType="textPersonName" -->
+        android:hint="@string/txt_first_name"
+        android:textColor="@android:color/background_dark" />
 
     <TextView
         android:id="@+id/txt_last_name_cell"
@@ -31,21 +31,8 @@
         android:layout_marginRight="8dp"
         android:layout_marginTop="8dp"
         android:ems="10"
-        android:hint="@string/txt_last_name" />
-        <!--android:inputType="textPersonName" -->
-
-    <TextView
-        android:id="@+id/txt_email_cell"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="8dp"
-        android:ems="10"
-        android:hint="@string/txt_email"
-        android:onClick="sendEmail"/>
-        <!--android:inputType="textEmailAddress" -->
+        android:hint="@string/txt_last_name"
+        android:textColor="@android:color/background_dark" />
 
     <TextView
         android:id="@+id/txt_phone_cell"
@@ -57,7 +44,21 @@
         android:layout_marginTop="8dp"
         android:ems="10"
         android:hint="@string/txt_phone"
-        android:onClick="callToNumber" />
-        <!--android:inputType="phone" -->
+        android:clickable="true"
+        android:textColor="@android:color/background_dark" />
+
+    <TextView
+        android:id="@+id/txt_email_cell"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:hint="@string/txt_email"
+        android:clickable="true"
+        android:textColor="@android:color/background_dark" />
+
 
 </LinearLayout>

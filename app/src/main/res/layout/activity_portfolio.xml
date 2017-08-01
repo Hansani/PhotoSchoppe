@@ -9,6 +9,5 @@
         android:layout_height="match_parent"
         android:id="@+id/photos_list_view"
         android:divider="@android:color/darker_gray"
-        android:dividerHeight="2dp"
-        />
+        android:dividerHeight="2dp" />
 </LinearLayout>

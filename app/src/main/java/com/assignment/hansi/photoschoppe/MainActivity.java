@@ -60,6 +60,18 @@ public class MainActivity extends RoboActivity {
         startActivity(intent);
     }
 
+    public void logoutPerformed(View view) {
+        SharedPreferences preferences = getSharedPreferences("com.assignment.hansi.userdetail", 0);
+        boolean is_login = preferences.getBoolean(getString(R.string.is_login), Boolean.FALSE);
+        if (is_login) {
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.putBoolean(getString(R.string.previously_started), Boolean.FALSE);
+            editor.commit();
+            Intent intent = new Intent(getApplicationContext(), LogInActivity.class);
+            startActivity(intent);
+            finish();
+        }
+    }
 
 
 }
