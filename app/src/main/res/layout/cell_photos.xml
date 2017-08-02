@@ -18,8 +18,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp" />
 
-    <com.android.volley.toolbox.NetworkImageView
-        android:id="@+id/networkImageView"
+    <ImageView
+        android:id="@+id/image_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp" />

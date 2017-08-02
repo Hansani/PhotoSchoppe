@@ -2,8 +2,6 @@ package com.assignment.hansi.photoschoppe;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -15,9 +13,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 import roboguice.activity.RoboActivity;
@@ -66,7 +61,7 @@ public class DirectoryActivity extends RoboActivity {
             String outFileName = DBHandler.LOCATION + DBHandler.DB_NAME;
             OutputStream outputStream = new FileOutputStream(outFileName);
             byte[] bytes = new byte[1024];
-            int n = 0;
+            int n;
             while ((n = inputStream.read(bytes)) > 0) {
                 outputStream.write(bytes, 0, n);
             }
@@ -82,7 +77,7 @@ public class DirectoryActivity extends RoboActivity {
     //sort list alphabetically order
     public List<Photographer> sortPG(List<Photographer> photographers){
         for (int i = 0; i < photographers.size(); i++) {
-            Photographer temp = null;
+            Photographer temp;
             for (int j = 0; j < photographers.size(); j++) {
                 if (photographers.get(i).getFirst_name().compareTo(photographers.get(j).getFirst_name()) < 0) {
                     temp = photographers.get(i);

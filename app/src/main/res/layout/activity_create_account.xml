@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorAccent"
@@ -12,7 +13,7 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/txt_view_user_name"
+            android:id="@+id/CA_txt_view_user_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
@@ -26,7 +27,7 @@
             android:textStyle="bold" />
 
         <EditText
-            android:id="@+id/txt_user_name"
+            android:id="@+id/CA_txt_user_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
@@ -35,18 +36,10 @@
             android:layout_marginTop="8dp"
             android:ems="10"
             android:textColor="@android:color/background_dark"
-            android:inputType="textPersonName" />
+            android:inputType="textPersonName"
+            android:textColorLink="@android:color/black"
+            android:textSize="12sp" />
 
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:orientation="vertical">
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
     </LinearLayout>
 
     <LinearLayout
@@ -58,7 +51,7 @@
         android:visibility="visible">
 
         <TextView
-            android:id="@+id/txt_view_email"
+            android:id="@+id/CA_txt_view_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
@@ -72,7 +65,7 @@
             android:textStyle="bold" />
 
         <EditText
-            android:id="@+id/txt_email"
+            android:id="@+id/CA_txt_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
@@ -81,19 +74,11 @@
             android:layout_marginTop="8dp"
             android:ems="10"
             android:inputType="textEmailAddress"
-            android:textColor="@android:color/background_dark" />
+            android:textColor="@android:color/background_dark"
+            android:textColorLink="@android:color/black"
+            android:textSize="12sp" />
     </LinearLayout>
 
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:orientation="vertical">
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -104,7 +89,7 @@
         android:visibility="visible">
 
         <TextView
-            android:id="@+id/txt_view_password"
+            android:id="@+id/CA_txt_view_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
@@ -118,7 +103,7 @@
             android:textStyle="bold" />
 
         <EditText
-            android:id="@+id/txt_password"
+            android:id="@+id/CA_txt_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
@@ -127,17 +112,19 @@
             android:layout_marginTop="8dp"
             android:ems="10"
             android:inputType="textPassword"
-            android:textColor="@android:color/background_dark" />
-    </LinearLayout>
+            android:textColor="@android:color/background_dark"
+            android:textColorLink="@android:color/black"
+            android:textSize="12sp"
+            android:clickable="true"
+            android:elevation="0dp" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:orientation="vertical">
-
-        <Space
+        <ProgressBar
+            style="?android:attr/progressBarStyle"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:id="@+id/password_progress"
+            android:layout_height="10dp"
+            android:max="4"
+            android:progress="1"/>
     </LinearLayout>
 
     <LinearLayout
@@ -149,7 +136,7 @@
         android:visibility="visible">
 
         <TextView
-            android:id="@+id/txt_view_confirm_password"
+            android:id="@+id/CA_txt_view_confirm_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
@@ -163,7 +150,7 @@
             android:textStyle="bold" />
 
         <EditText
-            android:id="@+id/txt_confirm_password"
+            android:id="@+id/CA_txt_confirm_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
@@ -172,11 +159,22 @@
             android:layout_marginTop="8dp"
             android:ems="10"
             android:inputType="textPassword"
-            android:textColor="@android:color/background_dark" />
+            android:textColor="@android:color/background_dark"
+            android:textColorLink="@android:color/black"
+            android:textSize="12sp"
+            android:clickable="true"/>
+
+        <ProgressBar
+            style="?android:attr/progressBarStyle"
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:id="@+id/confirm_progress"
+            android:max="4"
+            android:progress="1"/>
     </LinearLayout>
 
     <Button
-        android:id="@+id/_button_create_account"
+        android:id="@+id/CA_button_create_account"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
@@ -191,7 +189,7 @@
         android:textColor="@android:color/background_dark"
         android:textSize="24sp"
         android:textStyle="bold"
-        android:onClick="createAccountMethod"/>
+        android:onClick="onClick"/>
 
 
 </LinearLayout>

@@ -2,43 +2,75 @@
     //app name
     <string name="app_name">PhotoSchoppe</string>
 
-    //create account
+    //shared_preferences
     <string name="user_name_SP">user_name</string>
     <string name="password_SP">password</string>
     <string name="email_SP">email</string>
+    <string name="previously_started">previously_started</string>
+    <string name="is_login">is_login</string>
 
+    //create account
+    <string name="txt_password_confirmed">Confirm Password</string>
+    <string name="button_create_me">CREATE ACCOUNT</string>
 
+    //main
     <string name="hi_name">Hi %1$s</string>
     <string name="welcome_message">WELCOME TO PHOTO SCHOPPE</string>
     <string name="button_portfolio">PORTFOLIO</string>
     <string name="button_directory">DIRECTORY</string>
     <string name="button_more">MORE</string>
-    <string name="button_create_me">CREATE ACCOUNT</string>
-    <string name="txt_user_name">User Name</string>
-    <string name="txt_email">Email</string>
-    <string name="txt_password">Password</string>
-    <string name="txt_password_confirmed">Confirm Password</string>
+    <string name="btn_logout">Log Out</string>
+
+    //Directory
     <string name="txt_first_name">First Name</string>
     <string name="txt_last_name">Last Name</string>
     <string name="txt_phone">Phone NO</string>
-    <string name="previously_started">previously_started</string>
-    <string name="is_login">is_login</string>
+
+    //common
+    <string name="txt_password">Password</string>
+    //create account, login
+    <string name="txt_email">Email</string>
+    //create account, directory
+    <string name="txt_user_name">User Name</string>
+    // create account, login
+
+    //Login
     <string name="button_login">LOG IN</string>
+
+    //More
+    <string name="photoschoppe_address">No.48,\nIBM Building - 4th Floor,\nNawam Mawatha,\nColombo.</string>
+    <string name="photoschoppe_phone_no">011 2 300500</string>
+    <string name="photoschoppe_email">PhotoSchoppe@gmail.com</string>
+    <string name="view_location_btn">VIEW LOCATION</string>
+    <string name="address">Address : </string>
+    <string name="phone_no">Phone NO :</string>
+    <string name="email">Email :</string>
+
+    //Email Intent
     <string name="enter_email">Enter Email</string>
+    <string name="send_mail_btn">Send Mail</string>
     <string name="enter_subject">Enter_Subject</string>
     <string name="message">Enter Message</string>
-    <string name="photoschoppe_address">No.48,\nIBM Building - 4th Floor,\nNawam Mawatha,\nColombo.</string>
-    <string name="address">Address : </string>
-    <string name="photoschoppe_phone_no">011 2 300500</string>
-    <string name="phone_no">Phone NO :</string>
-    <string name="photoschoppe_email">PhotoSchoppe@gmail.com</string>
-    <string name="email">Email :</string>
-    <string name="send_mail_btn">Send Mail</string>
-    <string name="sample_phone_num">123 123 1234</string>
-    <string name="view_location_btn">VIEW LOCATION</string>
-    <string name="title_activity_load_location">Map</string>
-    <string name="title_activity_location">Map</string>
+
+    //Protfolio
     <string name="share_image">Share</string>
     <string name="web_image">Web View</string>
-    <string name="btn_logout">Log Out</string>
+    <string name="title_activity_load_location">Map</string>
+    <string name="title_activity_location">Map</string>
+
+    //Validate
+    <string name="validate_email">You have entered wrong email</string>
+    <string name="validate_password">You have entered password</string>
+    <string name="required_first_name">Enter First Name</string>
+    <string name="required_last_name">Enter Last Name</string>
+    <string name="required_email">Enter Email</string>
+    <string name="required_password">Enter Strong Password</string>
+    <string name="validate_user_name">Wrong User Name</string>
+    <string name="title_activity_maps">Map</string>
+
+    //Notice
+    <string name="log_in_error">You have entered User Name or Password incorrectly. Please try again.</string>
+    <string name="log_in_restricted">Sorry! You have tried so many times please try again later!</string>
+
+
 </resources>

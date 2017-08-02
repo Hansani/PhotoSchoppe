@@ -18,7 +18,8 @@
         android:text="@string/btn_logout"
         android:background="@color/colorPrimary"
         android:layout_alignParentRight="true"
-        android:onClick="logoutPerformed"/>
+        android:onClick="logoutPerformed"
+        android:textColor="@android:color/background_light" />
 
     <TextView
         android:id="@+id/txt_view_hi"
@@ -32,7 +33,7 @@
         android:layout_below="@id/btn_logout"
         android:gravity="center_horizontal"
         android:text="@string/hi_name"
-        android:textColor="@android:color/background_dark"
+        android:textColor="@android:color/background_light"
         android:textSize="24sp"
         android:textStyle="bold" />
 
@@ -48,7 +49,7 @@
         android:layout_marginTop="100dp"
         android:gravity="center_horizontal"
         android:text="@string/welcome_message"
-        android:textColor="@android:color/background_dark"
+        android:textColor="?android:attr/colorBackground"
         android:textSize="40sp"
         android:textStyle="bold" />
 
@@ -74,7 +75,7 @@
             android:background="@android:color/holo_red_light"
             android:onClick="pressedPortfolio"
             android:text="@string/button_portfolio"
-            android:textColor="@android:color/background_dark"
+            android:textColor="@android:color/background_light"
             android:textSize="16sp"
             android:textStyle="bold" />
 
@@ -91,7 +92,7 @@
             android:background="@android:color/holo_red_light"
             android:onClick="pressedDirectory"
             android:text="@string/button_directory"
-            android:textColor="@android:color/background_dark"
+            android:textColor="@android:color/background_light"
             android:textSize="16sp"
             android:textStyle="bold" />
 
@@ -108,7 +109,7 @@
             android:background="@android:color/holo_red_light"
             android:onClick="pressedMore"
             android:text="@string/button_more"
-            android:textColor="@android:color/background_dark"
+            android:textColor="@android:color/background_light"
             android:textSize="16sp"
             android:textStyle="bold" />
     </LinearLayout>

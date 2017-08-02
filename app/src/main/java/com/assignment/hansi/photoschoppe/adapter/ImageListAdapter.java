@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +22,7 @@ import com.assignment.hansi.photoschoppe.AppController;
 import com.assignment.hansi.photoschoppe.R;
 import com.assignment.hansi.photoschoppe.SingleImageActivity;
 import com.assignment.hansi.photoschoppe.model.Image;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONObject;
 
@@ -31,15 +33,13 @@ import java.util.List;
  */
 
 public class ImageListAdapter extends BaseAdapter {
-    private Activity activity;
-    private LayoutInflater layoutInflater;
     private List<Image> imageList;
-    private ImageLoader imageLoader;
+    //private ImageLoader imageLoader;
     private Context context;
 
-    public ImageListAdapter(Response.Listener<JSONObject> activity, List<Image> imageList, Context context) {
+    //Response.Listener<JSONObject> activity para in constructor
+    public ImageListAdapter(List<Image> imageList, Context context) {
         this.context=context;
-        this.activity = (Activity) activity;
         this.imageList = imageList;
     }
 
@@ -60,24 +60,24 @@ public class ImageListAdapter extends BaseAdapter {
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
-
-        final NetworkImageView imageView = (NetworkImageView) view.findViewById(R.id.networkImageView);
+        if (view == null) {
+            view = View.inflate(context.getApplicationContext(), R.layout.cell_photos, null);
+        }
+        final ImageView imageView = (ImageView) view.findViewById(R.id.image_view);
         TextView titleView = (TextView) view.findViewById(R.id.image_title);
 
-        if (layoutInflater == null){
-            layoutInflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        }
-        if (view == null){
-            view= layoutInflater.inflate(R.layout.cell_photos,null);
+        titleView.setText(imageList.get(i).getTitle());
+        final Image image = imageList.get(i);
+        Picasso.with(context).load(image.getMedia()).into(imageView);
 
-        }
-        if (imageLoader == null){
-            imageLoader = AppController.getInstance(context.getApplicationContext()).getImLoader();
-
-            //getting data for row
-            final Image image = imageList.get(i);
-            imageView.setImageUrl(image.getMedia(),imageLoader);
-            titleView.setText(image.getTitle());
+//        =====================================================================
+//        if (imageLoader == null){
+//            imageLoader = AppController.getInstance(context.getApplicationContext()).getImLoader();
+//
+//            //getting data for row
+//            imageView.setImageUrl(image.getMedia(),imageLoader);
+//            titleView.setText(image.getTitle());}
+//        =================================================================
 
             imageView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -88,7 +88,6 @@ public class ImageListAdapter extends BaseAdapter {
                     context.startActivity(intent);
                 }
             });
-        }
 
 
       return view;

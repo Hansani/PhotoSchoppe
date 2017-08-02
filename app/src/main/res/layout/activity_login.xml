@@ -5,11 +5,11 @@
     android:background="@color/colorAccent">
 
     <EditText
+        android:id="@+id/Login_txt_user_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
         android:ems="10"
-        android:id="@+id/txt_user_name_login"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginTop="100dp"
@@ -18,15 +18,14 @@
         android:hint="@string/txt_user_name"
         android:layout_gravity="center_vertical|center_horizontal"
         android:textColor="@android:color/background_dark"
-        android:singleLine="true"
         android:maxLines="1" />
 
     <EditText
+        android:id="@+id/Login_txt_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPassword"
         android:ems="10"
-        android:id="@+id/txt_password_login"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginTop="16dp"
@@ -46,4 +45,19 @@
         android:background="@color/colorPrimary"
         android:layout_gravity="center_horizontal"
         android:onClick="onClick"/>
+
+    <TextView
+        android:id="@+id/exception"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        android:ems="10"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_gravity="center_horizontal"
+        android:textColor="@android:color/holo_red_dark"
+        android:textSize="18sp"/>
+
+
 </LinearLayout>

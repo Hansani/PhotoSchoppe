@@ -1,22 +1,11 @@
 package com.assignment.hansi.photoschoppe;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import com.assignment.hansi.photoschoppe.adapter.PhotographerListAdapter;
-import com.assignment.hansi.photoschoppe.db.connection.DBHandler;
-
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.io.OutputStream;
 
 import roboguice.activity.RoboActivity;
 import roboguice.inject.ContentView;
@@ -34,6 +23,7 @@ public class MainActivity extends RoboActivity {
         SharedPreferences preferences = getSharedPreferences("com.assignment.hansi.userdetail", 0);
         String user_name = preferences.getString(getString(R.string.user_name_SP), "not available");
         String original = getString(R.string.hi_name);
+        Log.d("original", original);
         String new_hi_string = String.format(original, user_name);
         hi_txt.setText(new_hi_string);
 
@@ -65,7 +55,7 @@ public class MainActivity extends RoboActivity {
         boolean is_login = preferences.getBoolean(getString(R.string.is_login), Boolean.FALSE);
         if (is_login) {
             SharedPreferences.Editor editor = preferences.edit();
-            editor.putBoolean(getString(R.string.previously_started), Boolean.FALSE);
+            editor.putBoolean(getString(R.string.is_login), Boolean.FALSE);
             editor.commit();
             Intent intent = new Intent(getApplicationContext(), LogInActivity.class);
             startActivity(intent);

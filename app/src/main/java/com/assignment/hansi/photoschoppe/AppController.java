@@ -1,9 +1,9 @@
 package com.assignment.hansi.photoschoppe;
 
-import android.app.Application;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.os.AsyncTask;
+import android.graphics.Bitmap;
+import android.util.LruCache;
 import android.widget.ListView;
 
 import com.android.volley.Request;
@@ -28,6 +28,7 @@ import java.util.List;
  */
 
 public class AppController {
+    private static final String url = "https://api.flickr.com/services/feeds/photos_public.gne?id=60269086@N05&format=json&nojsoncallback=1";
     public static final String TAG = AppController.class.getSimpleName();
     private RequestQueue requestQueue;
     private ImageLoader imLoader;
@@ -35,14 +36,27 @@ public class AppController {
     private Context context;
     private List<Image> imageList = new ArrayList<>();
     private ImageListAdapter imageListAdapter;
-    private static final String url = "https://api.flickr.com/services/feeds/photos_public.gne?id=60269086@N05&format=json&nojsoncallback=1";
     private ProgressDialog progressDialog;
 
 
     private AppController(Context context) {
         this.context = context;
         requestQueue = getRequestQueue();
-        getImLoader();
+        imLoader = new ImageLoader(requestQueue,
+                new ImageLoader.ImageCache() {
+                    private final LruCache<String, Bitmap>
+                            cache = new LruCache<String, Bitmap>(20);
+
+                    @Override
+                    public Bitmap getBitmap(String url) {
+                        return cache.get(url);
+                    }
+
+                    @Override
+                    public void putBitmap(String url, Bitmap bitmap) {
+                        cache.put(url, bitmap);
+                    }
+                });
     }
 
 
@@ -63,9 +77,6 @@ public class AppController {
 
     public ImageLoader getImLoader() {
         getRequestQueue();
-        if (imLoader == null) {
-            imLoader = new ImageLoader(this.requestQueue, new BitmapCache());
-        }
         return this.imLoader;
     }
 
@@ -93,14 +104,14 @@ public class AppController {
                         JSONObject jsonObject = jsonArray.getJSONObject(i);
                         Image image = new Image();
                         image.setTitle(jsonObject.getString("title"));
+                        image.setLink(jsonObject.getString("link"));
                         JSONObject object = jsonObject.getJSONObject("media");
-                        image.setMedia(object.getString("media"));
-                        image.setMedia(object.getString("link"));
+                        image.setMedia(object.getString("m"));
                         imageList.add(image);
                     }
-                    imageListAdapter = new ImageListAdapter(this, imageList, context.getApplicationContext());
-                    imageListAdapter.notifyDataSetChanged();
+                    imageListAdapter = new ImageListAdapter(imageList, context.getApplicationContext());
                     photos_list.setAdapter(imageListAdapter);
+                    imageListAdapter.notifyDataSetChanged();
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

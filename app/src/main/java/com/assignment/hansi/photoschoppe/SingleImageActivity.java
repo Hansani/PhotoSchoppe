@@ -4,11 +4,14 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.PersistableBundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
+import com.squareup.picasso.Picasso;
 
 import roboguice.activity.RoboActivity;
 import roboguice.inject.ContentView;
@@ -21,25 +24,23 @@ import roboguice.inject.InjectView;
 @ContentView(R.layout.activity_single_image)
 public class SingleImageActivity extends RoboActivity {
 
-    private ImageLoader loader = AppController.getInstance(this.getApplicationContext()).getImLoader();
     String url;
     String link;
 
-    @InjectView(R.id.btn_share)
-    private Button btn_share;
-    @InjectView(R.id.btn_web)
-    private Button btn_web;
     @InjectView(R.id.image_view)
-    private NetworkImageView image_view;
+    private ImageView image_view;
 
     @Override
     public void onCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
         super.onCreate(savedInstanceState, persistentState);
+        Log.d("start", "start new activity");
         Bundle bundle = getIntent().getExtras();
         url = bundle.getString("image_url");
+        Log.d("url",url);
         link = bundle.getString("link");
-        image_view.setImageUrl(url, loader);
-        image_view.setAdjustViewBounds(true);
+        Log.d("link",link);
+        Picasso.with(this).load(url).into(image_view);
+        //image_view.setAdjustViewBounds(true);
 
     }
 
@@ -48,6 +49,7 @@ public class SingleImageActivity extends RoboActivity {
         mail_intent.setData(Uri.parse("mailTo:"));
         mail_intent.setType("text/plain");
         mail_intent.putExtra(Intent.EXTRA_EMAIL," ");
+        mail_intent.putExtra(Intent.EXTRA_CC, " ");
         mail_intent.putExtra(Intent.EXTRA_SUBJECT, " ");
         mail_intent.putExtra(Intent.EXTRA_TEXT, url);
         startActivity(Intent.createChooser(mail_intent, "send mail.."));

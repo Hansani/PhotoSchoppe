@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.support.v4.app.ActivityCompat;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -64,13 +65,12 @@ public class PhotographerListAdapter extends BaseAdapter {
         phone_no.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent phoneIntent = new Intent(Intent.ACTION_CALL);
+                Log.d("phone","call the listerner");
+                Intent phoneIntent = new Intent(Intent.ACTION_DIAL);
+                Log.d("phone","call the intent");
                 phoneIntent.setData(Uri.parse("tel:"+phone_no.getText().toString()));
-                if (ActivityCompat.checkSelfPermission(context.getApplicationContext(),
-                        Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-                    return;
-                }
-                context.startActivity(phoneIntent);
+                context.startActivity(Intent.createChooser(phoneIntent,"Dial"));
+                Log.d("phone","call the start");
 
             }
         });

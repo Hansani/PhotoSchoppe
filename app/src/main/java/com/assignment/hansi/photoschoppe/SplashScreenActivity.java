@@ -25,14 +25,18 @@ public class SplashScreenActivity extends RoboActivity {
                     sleep(3000);
                     SharedPreferences preferences = getSharedPreferences("com.assignment.hansi.userdetail", 0);
                     boolean previouslyStarted = preferences.getBoolean(getString(R.string.previously_started), Boolean.FALSE);
+                    boolean is_login = preferences.getBoolean(getString(R.string.is_login), Boolean.FALSE);
                     if (!previouslyStarted) {
                         SharedPreferences.Editor editor = preferences.edit();
                         editor.putBoolean(getString(R.string.previously_started), Boolean.TRUE);
                         editor.commit();
                         Intent intent = new Intent(getApplicationContext(), CreateAccountActivity.class);
                         startActivity(intent);
-                    } else {
+                    } else if(previouslyStarted && is_login ){
                         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                        startActivity(intent);
+                    }else if(previouslyStarted && !is_login){
+                        finish();Intent intent = new Intent(getApplicationContext(), LogInActivity.class);
                         startActivity(intent);
                         finish();
                     }
