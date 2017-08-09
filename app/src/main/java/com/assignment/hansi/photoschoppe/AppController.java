@@ -42,21 +42,21 @@ public class AppController {
     private AppController(Context context) {
         this.context = context;
         requestQueue = getRequestQueue();
-        imLoader = new ImageLoader(requestQueue,
-                new ImageLoader.ImageCache() {
-                    private final LruCache<String, Bitmap>
-                            cache = new LruCache<String, Bitmap>(20);
-
-                    @Override
-                    public Bitmap getBitmap(String url) {
-                        return cache.get(url);
-                    }
-
-                    @Override
-                    public void putBitmap(String url, Bitmap bitmap) {
-                        cache.put(url, bitmap);
-                    }
-                });
+//        imLoader = new ImageLoader(requestQueue,
+//                new ImageLoader.ImageCache() {
+//                    private final LruCache<String, Bitmap>
+//                            cache = new LruCache<String, Bitmap>(20);
+//
+//                    @Override
+//                    public Bitmap getBitmap(String url) {
+//                        return cache.get(url);
+//                    }
+//
+//                    @Override
+//                    public void putBitmap(String url, Bitmap bitmap) {
+//                        cache.put(url, bitmap);
+//                    }
+//                });
     }
 
 
@@ -85,7 +85,7 @@ public class AppController {
         getRequestQueue().add(request);
     }
 
-    public void canclePendingRequest(Object tag) {
+    public void cancelPendingRequest(Object tag) {
         if (requestQueue != null) {
             requestQueue.cancelAll(tag);
         }

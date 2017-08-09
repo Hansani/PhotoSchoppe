@@ -6,11 +6,8 @@ import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 
-import com.android.volley.toolbox.ImageLoader;
-import com.android.volley.toolbox.NetworkImageView;
 import com.squareup.picasso.Picasso;
 
 import roboguice.activity.RoboActivity;
@@ -31,16 +28,16 @@ public class SingleImageActivity extends RoboActivity {
     private ImageView image_view;
 
     @Override
-    public void onCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
-        super.onCreate(savedInstanceState, persistentState);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         Log.d("start", "start new activity");
         Bundle bundle = getIntent().getExtras();
-        url = bundle.getString("image_url");
+        url = bundle.getString("media");
         Log.d("url",url);
         link = bundle.getString("link");
         Log.d("link",link);
         Picasso.with(this).load(url).into(image_view);
-        //image_view.setAdjustViewBounds(true);
+        image_view.setAdjustViewBounds(true);
 
     }
 

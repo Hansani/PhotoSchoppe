@@ -5,6 +5,8 @@ import android.content.Context;
 import android.os.Bundle;
 import android.widget.ListView;
 
+import com.assignment.hansi.photoschoppe.adapter.ImageListAdapter;
+
 import roboguice.activity.RoboActivity;
 import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
@@ -23,13 +25,18 @@ public class PortfolioActivity extends RoboActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("Load Images...");
-        progressDialog.show();
+//        progressDialog = new ProgressDialog(this);
+//        progressDialog.setMessage("Load Images...");
+//        progressDialog.show();
 
         //Create Volley Request
         AppController.getInstance(this.getApplicationContext()).addToRequestQueue(AppController.
                 getInstance(this).loadImage(photos_list));
+
+    }
+
+    public Context getContext(){
+        return this.getApplicationContext();
     }
 
 }

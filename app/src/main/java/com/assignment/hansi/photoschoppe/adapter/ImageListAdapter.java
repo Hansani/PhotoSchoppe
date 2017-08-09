@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +20,7 @@ import com.android.volley.Response;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
 import com.assignment.hansi.photoschoppe.AppController;
+import com.assignment.hansi.photoschoppe.PortfolioActivity;
 import com.assignment.hansi.photoschoppe.R;
 import com.assignment.hansi.photoschoppe.SingleImageActivity;
 import com.assignment.hansi.photoschoppe.model.Image;
@@ -39,7 +41,7 @@ public class ImageListAdapter extends BaseAdapter {
 
     //Response.Listener<JSONObject> activity para in constructor
     public ImageListAdapter(List<Image> imageList, Context context) {
-        this.context=context;
+        this.context = context;
         this.imageList = imageList;
     }
 
@@ -78,18 +80,17 @@ public class ImageListAdapter extends BaseAdapter {
 //            imageView.setImageUrl(image.getMedia(),imageLoader);
 //            titleView.setText(image.getTitle());}
 //        =================================================================
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context.getApplicationContext(), SingleImageActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.putExtra("media", image.getMedia());
+                intent.putExtra("link", image.getLink());
+                context.startActivity(intent);
+            }
+        });
 
-            imageView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent intent = new Intent(context.getApplicationContext(), SingleImageActivity.class);
-                    intent.putExtra("image_url", image.getMedia());
-                    intent.putExtra("link", image.getLink());
-                    context.startActivity(intent);
-                }
-            });
-
-
-      return view;
+        return view;
     }
 }
