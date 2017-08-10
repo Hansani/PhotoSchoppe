@@ -26,7 +26,7 @@
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
             style="@style/Widget.AppCompat.Button.Borderless"
-            android:onClick="shareImage"/>
+            android:clickable="true"/>
 
         <Button
             android:text="@string/web_image"
@@ -40,7 +40,7 @@
             android:layout_marginRight="5dp"
             android:layout_marginTop="5dp"
             style="@style/Widget.AppCompat.Button.Borderless"
-            android:onClick="viewWeb"/>
+            android:clickable="true"/>
     </LinearLayout>
 
     <ImageView
