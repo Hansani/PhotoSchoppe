@@ -1,19 +1,31 @@
 package com.assignment.hansi.photoschoppe;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.provider.Settings;
+import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.assignment.hansi.photoschoppe.adapter.FullScreenAdapter;
 import com.assignment.hansi.photoschoppe.model.Image;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
+
+import org.apache.velocity.runtime.log.Log;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -23,6 +35,8 @@ import java.util.ArrayList;
 import roboguice.activity.RoboActivity;
 import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
+
+import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 
 /**
  * Created by Hansi on 31/07/2017.
@@ -34,6 +48,8 @@ public class FullScreenActivity extends RoboActivity {
     private FullScreenAdapter fullScreenAdapter;
     private ArrayList<Image> images;
     Image image;
+    private SharedPreferences permissionGranted;
+    private Boolean sentToSetting;
 
     @InjectView(R.id.view_pager)
     private ViewPager view_pager;
@@ -45,6 +61,65 @@ public class FullScreenActivity extends RoboActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        permissionGranted = getSharedPreferences("com.assignment.hansi.userdetail", 0);
+
+        if (Build.VERSION.SDK_INT >= 23) {
+            if (checkSelfPermission(WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                if (shouldShowRequestPermissionRationale(WRITE_EXTERNAL_STORAGE)) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(FullScreenActivity.this);
+                    builder.setTitle("need Storage Permission");
+                    builder.setMessage("this app need storage permission");
+                    builder.setPositiveButton("Grant", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.cancel();
+                            ActivityCompat.requestPermissions(FullScreenActivity.this, new String[]{WRITE_EXTERNAL_STORAGE}, 100);
+                        }
+                    });
+                    builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.cancel();
+                        }
+                    });
+                    builder.show();
+                }
+            } else if (permissionGranted.getBoolean(WRITE_EXTERNAL_STORAGE, false)) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(FullScreenActivity.this);
+                builder.setTitle("need Storage Permission");
+                builder.setMessage("this app need storage permission");
+                builder.setPositiveButton("Grant", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.cancel();
+                        sentToSetting = true;
+                        Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                        Uri uri = Uri.fromParts("package", getPackageName(), null);
+                        intent.setData(uri);
+                        startActivityForResult(intent, 101);
+                        Toast.makeText(getBaseContext(), "Go to permission to grant storage", Toast.LENGTH_LONG).show();
+                    }
+                });
+                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.cancel();
+                    }
+                });
+                builder.show();
+            } else {
+                ActivityCompat.requestPermissions(FullScreenActivity.this, new String[]{WRITE_EXTERNAL_STORAGE}, 100);
+            }
+
+            SharedPreferences.Editor editor = permissionGranted.edit();
+            editor.putBoolean(WRITE_EXTERNAL_STORAGE, Boolean.TRUE);
+            editor.commit();
+        } else {
+            Toast.makeText(getApplicationContext(), "You recieved permission to access the storage", Toast.LENGTH_LONG).show();
+        }
+
+
         Intent intent = getIntent();
         int position = intent.getIntExtra("position", 0);
         images = intent.getParcelableArrayListExtra("imageList");
@@ -84,6 +159,7 @@ public class FullScreenActivity extends RoboActivity {
 
     }
 
+    //created target
     private Target target = new Target() {
         @Override
         public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
@@ -109,5 +185,40 @@ public class FullScreenActivity extends RoboActivity {
         }
     };
 
+    //Request Permission
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == 100) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(getApplicationContext(), "You recieved permission to access the storage", Toast.LENGTH_LONG).show();
+
+            }else{
+                if (shouldShowRequestPermissionRationale(WRITE_EXTERNAL_STORAGE)) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(FullScreenActivity.this);
+                    builder.setTitle("need Storage Permission");
+                    builder.setMessage("this app need storage permission");
+                    builder.setPositiveButton("Grant", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.cancel();
+                            ActivityCompat.requestPermissions(FullScreenActivity.this, new String[]{WRITE_EXTERNAL_STORAGE}, 100);
+                        }
+                    });
+                    builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.cancel();
+                        }
+                    });
+                    builder.show();
+                }else {
+                    Toast.makeText(getApplicationContext(), "Unable to get Permission", Toast.LENGTH_LONG).show();
+                }
+            }
+
+        }
+    }
 }
