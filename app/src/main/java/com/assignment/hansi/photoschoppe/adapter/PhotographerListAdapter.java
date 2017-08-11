@@ -81,7 +81,8 @@ public class PhotographerListAdapter extends BaseAdapter {
                 Intent mail_intent = new Intent(Intent.ACTION_SEND);
                 mail_intent.setData(Uri.parse("mailTo:"));
                 mail_intent.setType("text/plain");
-                mail_intent.putExtra(Intent.EXTRA_EMAIL, email.getText().toString());
+                Log.d("to",email.getText().toString());
+                mail_intent.putExtra(Intent.EXTRA_EMAIL, new String[] {email.getText().toString()});
                 mail_intent.putExtra(Intent.EXTRA_SUBJECT, "Hello "+first_name.getText().toString());
                 mail_intent.putExtra(Intent.EXTRA_TEXT, "Add your text here");
                 context.startActivity(Intent.createChooser(mail_intent, "send mail.."));

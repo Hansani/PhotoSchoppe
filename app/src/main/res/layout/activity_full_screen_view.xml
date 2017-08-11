@@ -1,52 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorAccent">
+    android:background="@color/colorAccent"
+    android:orientation="vertical">
 
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp">
+        android:layout_marginTop="16dp"
+        android:orientation="horizontal">
 
         <Button
-            android:text="@string/share_image"
+            android:id="@+id/btn_share"
+            style="@style/Widget.AppCompat.Button.Borderless"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/btn_share"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="5dp"
             android:layout_weight="1"
             android:background="@color/colorPrimary"
+            android:clickable="true"
             android:paddingBottom="5dp"
-            android:paddingTop="5dp"
             android:paddingLeft="5dp"
             android:paddingRight="5dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
-            style="@style/Widget.AppCompat.Button.Borderless"
-            android:onClick="shareImage"/>
+            android:paddingTop="5dp"
+            android:text="@string/share_image" />
 
         <Button
-            android:text="@string/web_image"
+            android:id="@+id/btn_web"
+            style="@style/Widget.AppCompat.Button.Borderless"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/btn_web"
-            android:layout_weight="1"
-            android:background="@color/colorPrimary"
             android:layout_marginBottom="5dp"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:layout_marginTop="5dp"
-            style="@style/Widget.AppCompat.Button.Borderless"
-            android:onClick="viewWeb"/>
+            android:layout_weight="1"
+            android:background="@color/colorPrimary"
+            android:clickable="true"
+            android:text="@string/web_image" />
     </LinearLayout>
 
-    <ImageView
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/view_pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        class="android.support.v4.view.ViewPager"
-        android:id="@+id/image_view" />
+        android:visibility="visible" />
 
 </LinearLayout>

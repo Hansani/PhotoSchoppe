@@ -31,10 +31,6 @@ public class MoreActivity extends RoboActivity {
             public void onClick(View view) {
                 Intent phoneIntent = new Intent(Intent.ACTION_DIAL);
                 phoneIntent.setData(Uri.parse("tel:" + phone_no.getText().toString()));
-//                if (ActivityCompat.checkSelfPermission(getApplicationContext(),
-//                        android.Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-//                    return;
-//                }
                 startActivity(Intent.createChooser(phoneIntent,"Dial"));
 
             }

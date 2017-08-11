@@ -1,15 +1,15 @@
 package com.assignment.hansi.photoschoppe.model;
 
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.BaseAdapter;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 /**
  * Created by hansanibiyanwila on 7/28/17.
  */
 
-public class Image {
+public class Image implements Parcelable {
 
+    private int index;
     private String title;
     private String link;
     private String media;
@@ -20,11 +20,14 @@ public class Image {
     private String author_id;
     private String tags;
 
+
+    //constructor
     public Image() {
     }
 
-    public Image(String title, String link, String media, String date_taken, String description,
+    public Image(int index, String title, String link, String media, String date_taken, String description,
                  String published, String author, String author_id, String tags) {
+        this.index = index;
         this.title = title;
         this.link = link;
         this.media = media;
@@ -36,6 +39,35 @@ public class Image {
         this.tags = tags;
     }
 
+    public Image(int index, String title, String link, String media) {
+        this.index = index;
+        this.title = title;
+        this.link = link;
+        this.media = media;
+
+    }
+
+    //parceling part
+    protected Image(Parcel in) {
+        index = in.readInt();
+        title = in.readString();
+        link = in.readString();
+        media = in.readString();
+    }
+
+    public static final Creator<Image> CREATOR = new Creator<Image>() {
+        @Override
+        public Image createFromParcel(Parcel in) {
+            return new Image(in);
+        }
+
+        @Override
+        public Image[] newArray(int size) {
+            return new Image[size];
+        }
+    };
+
+    //getter and setter
     public String getAuthor_id() {
         return author_id;
     }
@@ -107,4 +139,27 @@ public class Image {
     public void setTags(String tags) {
         this.tags = tags;
     }
+
+    public int getIndex() {
+        return index;
+    }
+
+    public void setIndex(int index) {
+        this.index = index;
+    }
+
+    //implements method
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeInt(index);
+        parcel.writeString(title);
+        parcel.writeString(link);
+        parcel.writeString(media);
+    }
+
 }
