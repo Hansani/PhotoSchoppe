@@ -21,7 +21,7 @@ public class MainActivity extends RoboActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         SharedPreferences preferences = getSharedPreferences("com.assignment.hansi.userdetail", 0);
-        String user_name = preferences.getString(getString(R.string.user_name_SP), "not available");
+        String user_name = preferences.getString(getString(R.string.user_name_SP), "No Name");
         String original = getString(R.string.hi_name);
         Log.d("original", original);
         String new_hi_string = String.format(original, user_name);

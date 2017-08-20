@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorAccent">
+    android:background="@drawable/images">
 
     <EditText
         android:id="@+id/Login_txt_user_name"
@@ -44,7 +44,8 @@
         android:layout_marginTop="24dp"
         android:background="@color/colorPrimary"
         android:layout_gravity="center_horizontal"
-        android:onClick="onClick"/>
+        android:onClick="onClick"
+        android:textColor="@android:color/background_dark" />
 
     <TextView
         android:id="@+id/exception"

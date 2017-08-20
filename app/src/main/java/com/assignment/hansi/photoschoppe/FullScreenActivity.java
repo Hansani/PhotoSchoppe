@@ -48,6 +48,10 @@ public class FullScreenActivity extends RoboActivity {
     private FullScreenAdapter fullScreenAdapter;
     private ArrayList<Image> images;
     Image image;
+
+    private static final int EXTERNAL_STORAGE_PERMISSION_CONSTANT = 100;
+    private static final int REQUEST_PERMISSION_SETTING = 101;
+    private boolean sentToSettings = false;
     private SharedPreferences permissionGranted;
     private Boolean sentToSetting;
 
@@ -64,59 +68,62 @@ public class FullScreenActivity extends RoboActivity {
 
         permissionGranted = getSharedPreferences("com.assignment.hansi.userdetail", 0);
 
-        if (Build.VERSION.SDK_INT >= 23) {
-            if (checkSelfPermission(WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-                if (shouldShowRequestPermissionRationale(WRITE_EXTERNAL_STORAGE)) {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(FullScreenActivity.this);
-                    builder.setTitle("need Storage Permission");
-                    builder.setMessage("this app need storage permission");
-                    builder.setPositiveButton("Grant", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                            dialogInterface.cancel();
-                            ActivityCompat.requestPermissions(FullScreenActivity.this, new String[]{WRITE_EXTERNAL_STORAGE}, 100);
-                        }
-                    });
-                    builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                            dialogInterface.cancel();
-                        }
-                    });
-                    builder.show();
-                }
-            } else if (permissionGranted.getBoolean(WRITE_EXTERNAL_STORAGE, false)) {
+        if (ActivityCompat.checkSelfPermission(FullScreenActivity.this, WRITE_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED) {
+            if (ActivityCompat.shouldShowRequestPermissionRationale(FullScreenActivity.this,
+                    WRITE_EXTERNAL_STORAGE)) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(FullScreenActivity.this);
-                builder.setTitle("need Storage Permission");
-                builder.setMessage("this app need storage permission");
+                builder.setTitle("Need Storage Permission");
+                builder.setMessage("This app need storage permission");
                 builder.setPositiveButton("Grant", new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        dialogInterface.cancel();
-                        sentToSetting = true;
-                        Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-                        Uri uri = Uri.fromParts("package", getPackageName(), null);
-                        intent.setData(uri);
-                        startActivityForResult(intent, 101);
-                        Toast.makeText(getBaseContext(), "Go to permission to grant storage", Toast.LENGTH_LONG).show();
+                    public void onClick(DialogInterface dialog, int i) {
+                        dialog.cancel();
+                        ActivityCompat.requestPermissions(FullScreenActivity.this,
+                                new String[]{WRITE_EXTERNAL_STORAGE}, EXTERNAL_STORAGE_PERMISSION_CONSTANT);
                     }
                 });
                 builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        dialogInterface.cancel();
+                    public void onClick(DialogInterface dialog, int i) {
+                        dialog.cancel();
+                    }
+                });
+                builder.show();
+            } else if (permissionGranted.getBoolean(WRITE_EXTERNAL_STORAGE, false)) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(FullScreenActivity.this);
+                builder.setTitle("Need Storage Permission");
+                builder.setMessage("This app need storage permission");
+                builder.setPositiveButton("Grant", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int i) {
+                        dialog.cancel();
+                        sentToSetting = true;
+                        Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                        Uri uri = Uri.fromParts("package", getPackageName(), null);
+                        intent.setData(uri);
+                        startActivityForResult(intent, REQUEST_PERMISSION_SETTING);
+                        Toast.makeText(getBaseContext(), "Go to permission to Grant Storage",
+                                Toast.LENGTH_LONG).show();
+                    }
+                });
+                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int i) {
+                        dialog.cancel();
                     }
                 });
                 builder.show();
             } else {
-                ActivityCompat.requestPermissions(FullScreenActivity.this, new String[]{WRITE_EXTERNAL_STORAGE}, 100);
+                ActivityCompat.requestPermissions(FullScreenActivity.this,
+                        new String[]{WRITE_EXTERNAL_STORAGE}, EXTERNAL_STORAGE_PERMISSION_CONSTANT);
             }
 
             SharedPreferences.Editor editor = permissionGranted.edit();
             editor.putBoolean(WRITE_EXTERNAL_STORAGE, Boolean.TRUE);
             editor.commit();
         } else {
-            Toast.makeText(getApplicationContext(), "You recieved permission to access the storage", Toast.LENGTH_LONG).show();
+            proceedAfterPermission();
         }
 
 
@@ -159,6 +166,11 @@ public class FullScreenActivity extends RoboActivity {
 
     }
 
+    // proceed After Permission
+    private void proceedAfterPermission() {
+        Toast.makeText(getApplicationContext(), "You recieved permission to access the storage", Toast.LENGTH_LONG).show();
+    }
+
     //created target
     private Target target = new Target() {
         @Override
@@ -186,39 +198,67 @@ public class FullScreenActivity extends RoboActivity {
     };
 
     //Request Permission
-
-    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                                           int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == 100) {
+        if (requestCode == EXTERNAL_STORAGE_PERMISSION_CONSTANT) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                Toast.makeText(getApplicationContext(), "You recieved permission to access the storage", Toast.LENGTH_LONG).show();
-
-            }else{
-                if (shouldShowRequestPermissionRationale(WRITE_EXTERNAL_STORAGE)) {
+                proceedAfterPermission();
+            } else {
+                if (ActivityCompat.shouldShowRequestPermissionRationale(FullScreenActivity.this,
+                        WRITE_EXTERNAL_STORAGE)) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(FullScreenActivity.this);
-                    builder.setTitle("need Storage Permission");
-                    builder.setMessage("this app need storage permission");
+                    builder.setTitle("Need Storage Permission");
+                    builder.setMessage("This app needs Storage Permission");
                     builder.setPositiveButton("Grant", new DialogInterface.OnClickListener() {
                         @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                            dialogInterface.cancel();
-                            ActivityCompat.requestPermissions(FullScreenActivity.this, new String[]{WRITE_EXTERNAL_STORAGE}, 100);
+                        public void onClick(DialogInterface dialog, int i) {
+                            dialog.cancel();
+                            ActivityCompat.requestPermissions(FullScreenActivity.this,
+                                    new String[]{WRITE_EXTERNAL_STORAGE}, EXTERNAL_STORAGE_PERMISSION_CONSTANT);
                         }
                     });
                     builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                         @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                            dialogInterface.cancel();
+                        public void onClick(DialogInterface dialog, int i) {
+                            dialog.cancel();
                         }
                     });
                     builder.show();
-                }else {
-                    Toast.makeText(getApplicationContext(), "Unable to get Permission", Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(getApplicationContext(), "Unable to get Permission",
+                            Toast.LENGTH_LONG).show();
                 }
             }
 
         }
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_PERMISSION_SETTING) {
+            if (ActivityCompat.checkSelfPermission(FullScreenActivity.this,
+
+                    WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+                //Got Permission
+                proceedAfterPermission();
+            }
+        }
+    }
+
+
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+        if (sentToSettings) {
+            if (ActivityCompat.checkSelfPermission(FullScreenActivity.this, WRITE_EXTERNAL_STORAGE)
+                    == PackageManager.PERMISSION_GRANTED) {
+                //Got Permission
+                proceedAfterPermission();
+            }
+        }
+    }
+
 }

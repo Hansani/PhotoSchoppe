@@ -47,7 +47,7 @@ public class LogInActivity extends ValidatorActivity {
         SharedPreferences preferences = getSharedPreferences("com.assignment.hansi.userdetail", 0);
         boolean isLogIn = preferences.getBoolean(getString(R.string.is_login), Boolean.FALSE);
         if (!isLogIn) {
-            user_name_sp = preferences.getString(getString(R.string.user_name_SP), "No User Name ");
+            user_name_sp = preferences.getString(getString(R.string.user_name_SP), "No Name ");
             password_sp = preferences.getString(getString(R.string.password_SP), "No Password");
             if (user_name_sp.equals(user_name.getText().toString()) && password_sp.equals(password.getText().toString())) {
                 SharedPreferences.Editor editor = preferences.edit();

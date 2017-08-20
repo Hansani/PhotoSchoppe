@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorAccent"
+    android:background="@drawable/images"
     android:orientation="vertical">
 
     <LinearLayout
@@ -18,8 +19,9 @@
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginTop="100dp"
-            android:layout_weight="1"
-            android:text="@string/address" />
+            android:text="@string/address"
+            android:textColor="@android:color/background_dark"
+            android:layout_weight="0.14" />
 
         <TextView
             android:id="@+id/txt_view_ad"
@@ -29,7 +31,9 @@
             android:layout_marginRight="8dp"
             android:layout_marginTop="100dp"
             android:layout_weight="0.81"
-            android:text="@string/photoschoppe_address" />
+            android:text="@string/photoschoppe_address"
+            android:textColor="@android:color/background_dark"
+            android:allowUndo="false" />
     </LinearLayout>
 
     <LinearLayout
@@ -43,22 +47,26 @@
         <TextView
             android:id="@+id/txt_view_phone_no"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="22dp"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginTop="16dp"
             android:text="@string/phone_no"
-            android:layout_weight="0.33" />
+            android:textColor="@android:color/background_dark"
+            android:layout_weight="0.04" />
 
         <TextView
             android:id="@+id/txt_view_phone_num"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginTop="16dp"
             android:text="@string/photoschoppe_phone_no"
-            android:layout_weight="0.45" />
+            android:layout_weight="0.45"
+            android:textColor="@android:color/background_dark"
+            android:autoLink="phone"
+            android:allowUndo="false" />
     </LinearLayout>
 
     <LinearLayout
@@ -70,13 +78,14 @@
 
         <TextView
             android:id="@+id/CA_txt_view_email"
-            android:layout_width="wrap_content"
+            android:layout_width="27dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginTop="16dp"
-            android:layout_weight="0.09"
-            android:text="@string/email" />
+            android:text="@string/email"
+            android:textColor="@android:color/background_dark"
+            android:layout_weight="0.02" />
 
         <TextView
             android:id="@+id/txt_view_email_value"
@@ -86,7 +95,9 @@
             android:layout_marginRight="8dp"
             android:layout_marginTop="16dp"
             android:layout_weight="0.04"
-            android:text="@string/photoschoppe_email" />
+            android:text="@string/photoschoppe_email"
+            android:textColor="@android:color/background_dark"
+            android:autoLink="email" />
     </LinearLayout>
 
     <Button
@@ -99,6 +110,7 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginTop="16dp"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="center_horizontal"
+        android:textColor="@android:color/background_dark" />
 
 </LinearLayout>

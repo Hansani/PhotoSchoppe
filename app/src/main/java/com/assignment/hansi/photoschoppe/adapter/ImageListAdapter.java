@@ -72,6 +72,8 @@ public class ImageListAdapter extends BaseAdapter {
                 intent.putExtra("position",image.getIndex());
                 intent.putExtra("imageList",imageList);
                 context.startActivity(intent);
+
+
             }
         });
 
